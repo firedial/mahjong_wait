@@ -101,7 +101,7 @@ main = printResult [0, 0, 0, 0, 0, 0, 0, 0, 7]
 printResult :: [Int] -> IO ()
 printResult hai = do
     if isTargetHai hai then print hai else return ()
-    if hai == [7, 0, 0, 0, 0, 0, 0, 0, 0] then print "end" else printResult $ GetHai.nextHai hai
+    if hai == [7, 0, 0, 0, 0, 0, 0, 0, 0] then return () else printResult $ GetHai.nextHai hai
 
 
 
