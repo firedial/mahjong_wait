@@ -14,7 +14,7 @@ isFormerGravity :: [Int] -> [Int] -> Bool
 isFormerGravity [] [] = True
 isFormerGravity [] _ = True
 isFormerGravity _ [] = True
-isFormerGravity (x:xs) (y:ys) = if x > y then True else if x < y then False else isFormerGravity xs ys
+isFormerGravity (x:xs) (y:ys) = if x /= y then x > y else isFormerGravity xs ys
 
 
 -- 両端の 0 続きを除いたリスト
