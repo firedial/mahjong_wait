@@ -16,13 +16,13 @@ isTargetHaiRemoveAtama hai = (not . GetHai.isExistOverHaiCount) hai && NormalFor
 -- main = print $ (map getAgariHai (Agari.removeMentsuPossibleFromList [[0, 2, 2, 0, 3, 0, 0, 0, 0]]) )
 
 -- main = print $ isIrreducible [0, 3, 2, 2, 0, 0, 0, 0, 0]
-main = printResult [0, 0, 0, 0, 0, 0, 0, 0, 7]
+main = printResult [0, 0, 0, 0, 0, 0, 0, 0, 10]
 
 printResult :: [Int] -> IO ()
 printResult hai = do
     -- if isTargetHaiRemoveAtama hai then print hai else return ()
     if isTargetHai hai then print hai else return ()
-    if hai == [7, 0, 0, 0, 0, 0, 0, 0, 0] then return () else printResult $ GetHai.nextHai hai
+    if hai == [10, 0, 0, 0, 0, 0, 0, 0, 0] then return () else printResult $ GetHai.nextHai hai
 
 
 

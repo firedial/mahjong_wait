@@ -1,5 +1,5 @@
 
-module Agari(isAgariForm, isTempaiForm, getWaitCount) where
+module Agari(getAgariHai, isAgariForm, isTempaiForm, getWaitCount) where
 import qualified RemoveHai
 
 isAgariFormWithArgs :: Int -> Int -> [Int] -> Bool

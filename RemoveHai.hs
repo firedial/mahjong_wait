@@ -1,5 +1,5 @@
 
-module RemoveHai(repeatRemoveForm, removeMentsuPossibleFromList, removeAtamaPossibleFromList, removeAtamaConnectedMentsuPossibleFromList) where
+module RemoveHai(removeHai, repeatRemoveForm, removeMentsuPossibleFromList, removeAtamaPossibleFromList, removeAtamaConnectedMentsuPossibleFromList) where
 
 type Hai = [Int]
 type Atama = Int
@@ -63,7 +63,6 @@ atamaConnectedMentsuList =
         [0, 1, 1, 3, 0, 0, 0, 0, 0],
         [1, 1, 3, 0, 0, 0, 0, 0, 0]
     ]
-
 
 removeHai :: Hai -> Hai -> Hai
 removeHai [] [] = []

@@ -12,7 +12,7 @@ isNonRelatedAtamaConnectedMentsu :: [Int] -> Bool
 isNonRelatedAtamaConnectedMentsu hai =
     null hasUnchangedCount
     where
-        hasUnchangedCount = filter (\x -> fst x == count || snd x) (map getHaiAgariCondition list)
+        hasUnchangedCount = filter (\x -> x == count) (map (getEssentialWaitCount hai) list)
         -- 可能なかぎり雀頭を取り除いた牌形の配列
         list = RemoveHai.removeAtamaConnectedMentsuPossibleFromList [hai]
         -- 与えられた牌形の待ちの種類数
@@ -24,11 +24,27 @@ isNonRelatedAtama :: [Int] -> Bool
 isNonRelatedAtama hai =
     null hasUnchangedCount
     where
-        hasUnchangedCount = filter (\x -> fst x == count || (fst x == count - 1 && snd x)) (map getHaiAgariCondition list)
+        hasUnchangedCount = filter (\x -> x == count) (map (getEssentialWaitCount hai) list)
         -- 可能なかぎり雀頭を取り除いた牌形の配列
         list = RemoveHai.removeAtamaPossibleFromList [hai]
         -- 与えられた牌形の待ちの種類数
         count = Agari.getWaitCount hai
+
+getEssentialWaitCount :: [Int] -> [Int] -> Int
+getEssentialWaitCount originalHai hai =
+    length $ filter id essentialWaitHai
+    where
+        waitHai = Agari.getAgariHai hai
+        diff = RemoveHai.removeHai originalHai hai
+        addWaitHai = Agari.getAgariHai diff
+        isAgariForm = Agari.isAgariForm hai
+        essentialWaitHai = if isAgariForm then orList waitHai addWaitHai else waitHai
+
+orList :: [Bool] -> [Bool] -> [Bool]
+orList [] [] = []
+orList x [] = x
+orList [] y = y
+orList (x:xs) (y:ys) = (x || y) : orList xs ys
 
 -- 与えられた牌形に対して和了に関することを取得
 -- (和了牌の種類数, 与えられた牌形が和了形なら true / それ以外 false)
