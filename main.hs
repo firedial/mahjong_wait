@@ -34,7 +34,7 @@ isNonRelatedAtama hai =
 -- 与えられた牌形に対して和了に関することを取得
 -- (和了牌の種類数, 与えられた牌形が和了形なら true / それ以外 false)
 getHaiAgariCondition :: [Int] -> (Int, Bool)
-getHaiAgariCondition hai = (Agari.getWaitCount hai, Agari.isAgari hai)
+getHaiAgariCondition hai = (Agari.getWaitCount hai, Agari.isAgariForm hai)
 
 -- 待ちに関係ない面子がないかどうか
 -- ない: true / ある: false
@@ -46,14 +46,14 @@ isSemiIrreducible hai =
         hasUnchangedCount = filter (\x -> fst x == count) (map getHaiAgariCondition list)
         list = RemoveHai.removeMentsuPossibleFromList [hai]
         count = Agari.getWaitCount hai
-        isAgariForm = Agari.isAgari hai
+        isAgariForm = Agari.isAgariForm hai
 
 
 isTargetHai :: [Int] -> Bool
-isTargetHai hai = (not . GetHai.isExistOverHaiCount) hai && NormalForm.isNormalForm hai && Agari.isTempai hai && isSemiIrreducible hai && isIrreducible hai
+isTargetHai hai = (not . GetHai.isExistOverHaiCount) hai && NormalForm.isNormalForm hai && Agari.isTempaiForm hai && isSemiIrreducible hai && isIrreducible hai
 
 isTargetHaiRemoveAtama :: [Int] -> Bool
-isTargetHaiRemoveAtama hai = (not . GetHai.isExistOverHaiCount) hai && NormalForm.isNormalForm hai && Agari.isTempai hai && isSemiIrreducible hai
+isTargetHaiRemoveAtama hai = (not . GetHai.isExistOverHaiCount) hai && NormalForm.isNormalForm hai && Agari.isTempaiForm hai && isSemiIrreducible hai
 
 -- main = print $ GetHai.nextHai [0, 0, 3]
 -- main = print $ Agari.isAgariForm 0 1 [1, 0, 2] 
