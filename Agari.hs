@@ -18,8 +18,7 @@ isAgari hai =
         count = sum hai
 
 countTrue :: [Bool] -> Int
-countTrue [] = 0
-countTrue (x:xs) = if x then 1 + countTrue xs else countTrue xs
+countTrue x = length $ filter id x
 
 getAgariHai :: [Int] -> [Bool]
 getAgariHai x = map isAgari (getOnePlusList [] x)
@@ -29,7 +28,7 @@ getOnePlusList _ [] = []
 getOnePlusList xs (y:ys) = [(xs++((y+1):ys))] ++ getOnePlusList (xs ++ [y]) ys
 
 isTempai :: [Int] -> Bool
-isTempai hai = (countTrue . getAgariHai) hai /= 0
+isTempai hai = getWaitCount hai /= 0
 
 getWaitCount :: [Int] -> Int
 getWaitCount = countTrue . getAgariHai
