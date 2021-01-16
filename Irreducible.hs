@@ -4,7 +4,7 @@ import qualified Agari
 import qualified RemoveHai
 
 isIrreducible :: [Int] -> Bool
-isIrreducible hai = isNonRelatedAtama hai -- && isNonRelatedAtamaConnectedMentsu hai
+isIrreducible hai = isNonRelatedAtama hai && isNonRelatedAtamaConnectedMentsu hai
 
 -- 待ちに関係ない雀頭接続面子がないかどうか
 -- ない: true / ある: false
