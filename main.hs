@@ -5,11 +5,7 @@ import qualified NormalForm
 import qualified Irreducible
 
 isTargetForm :: [Int] -> Bool
-isTargetForm hai = and $ map (\f -> f hai) checkFunctions
-    where
-        checkFunctions = if isRegularForm then baseCheckFunctions ++ [Irreducible.isIrreducible] else baseCheckFunctions
-        isRegularForm = mod (sum hai) 3 == 1
-        baseCheckFunctions = [GetHai.isNotExistOverHaiCount, NormalForm.isNormalForm, Agari.isTempaiForm, Irreducible.isSemiIrreducible]
+isTargetForm hai = and $ map (\f -> f hai) [GetHai.isNotExistOverHaiCount, NormalForm.isNormalForm, Agari.isTempaiForm, Irreducible.isIrreducible]
 
 main = do
     n <- readLn

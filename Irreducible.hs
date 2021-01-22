@@ -1,10 +1,12 @@
 
-module Irreducible(isIrreducible, isSemiIrreducible) where
+module Irreducible(isIrreducible) where
 import qualified Agari
 import qualified RemoveHai
 
 isIrreducible :: [Int] -> Bool
-isIrreducible hai = isNonRelatedAtama hai && isNonRelatedAtamaConnectedMentsu hai
+isIrreducible hai = isMentsuIrreducible hai && if isRegularForm then isNonRelatedAtama hai && isNonRelatedAtamaConnectedMentsu hai else True
+    where
+        isRegularForm = mod (sum hai) 3 == 1
 
 -- 待ちに関係ない雀頭接続面子がないかどうか
 -- ない: true / ある: false
@@ -53,8 +55,8 @@ getHaiAgariCondition hai = (Agari.getWaitCount hai, Agari.isAgariForm hai)
 
 -- 待ちに関係ない面子がないかどうか
 -- ない: true / ある: false
-isSemiIrreducible :: [Int] -> Bool
-isSemiIrreducible hai =
+isMentsuIrreducible :: [Int] -> Bool
+isMentsuIrreducible hai =
     null hasUnchangedCountIrregular
     where
         hasUnchangedCountIrregular = filter (\x -> not isAgariForm || snd x) hasUnchangedCount
