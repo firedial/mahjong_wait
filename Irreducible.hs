@@ -4,14 +4,13 @@ import qualified Agari
 import qualified RemoveHai
 
 isIrreducible :: [Int] -> Bool
-isIrreducible hai = isMentsuIrreducible hai && if isRegularForm then isNonRelatedAtama hai && isNonRelatedAtamaConnectedMentsu hai else True
+isIrreducible hai = isMentsuIrreducible hai && if isRegularForm then isAtamaIrreducible hai && isAtamaConnectedShuntsuIrreducible hai else True
     where
         isRegularForm = mod (sum hai) 3 == 1
 
--- 待ちに関係ない雀頭接続面子がないかどうか
--- ない: true / ある: false
-isNonRelatedAtamaConnectedMentsu :: [Int] -> Bool
-isNonRelatedAtamaConnectedMentsu hai =
+-- 雀頭接続順子既約であるか
+isAtamaConnectedShuntsuIrreducible :: [Int] -> Bool
+isAtamaConnectedShuntsuIrreducible hai =
     null hasUnchangedCount
     where
         hasUnchangedCount = filter (\x -> x == count) (map (getEssentialWaitCount hai) list)
@@ -20,10 +19,9 @@ isNonRelatedAtamaConnectedMentsu hai =
         -- 与えられた牌形の待ちの種類数
         count = Agari.getWaitCount hai
 
--- 待ちに関係ない雀頭がないかどうか
--- ない: true / ある: false
-isNonRelatedAtama :: [Int] -> Bool
-isNonRelatedAtama hai =
+-- 雀頭既約であるか
+isAtamaIrreducible :: [Int] -> Bool
+isAtamaIrreducible hai =
     null hasUnchangedCount
     where
         hasUnchangedCount = filter (\x -> x == count) (map (getEssentialWaitCount hai) list)
