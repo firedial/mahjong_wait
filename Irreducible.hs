@@ -15,7 +15,7 @@ isAtamaConnectedShuntsuIrreducible hai =
     where
         hasUnchangedCount = filter (\x -> x == count) (map (getEssentialWaitCount hai) list)
         -- 可能なかぎり雀頭接続順子を取り除いた牌形の配列
-        list = RemoveHai.removeAtamaConnectedMentsuPossibleFromList [hai]
+        list = RemoveHai.removeAtamaConnectedShuntsuPossibleFromList [hai]
         -- 与えられた牌形の待ちの種類数
         count = Agari.getWaitCount hai
 

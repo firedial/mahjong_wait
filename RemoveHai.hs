@@ -1,5 +1,5 @@
 
-module RemoveHai(removeHai, repeatRemoveForm, removeMentsuPossibleFromList, removeAtamaPossibleFromList, removeAtamaConnectedMentsuPossibleFromList) where
+module RemoveHai(removeHai, repeatRemoveForm, removeMentsuPossibleFromList, removeAtamaPossibleFromList, removeAtamaConnectedShuntsuPossibleFromList) where
 
 type Hai = [Int]
 type Atama = Int
@@ -45,8 +45,8 @@ atamaList =
         [0, 0, 0, 0, 0, 0, 0, 0, 2]
     ]
 
-atamaConnectedMentsuList :: [Hai]
-atamaConnectedMentsuList =
+atamaConnectedShuntsuList :: [Hai]
+atamaConnectedShuntsuList =
     [
         [3, 1, 1, 0, 0, 0, 0, 0, 0],
         [0, 3, 1, 1, 0, 0, 0, 0, 0],
@@ -80,8 +80,8 @@ removePossible list hai = filter isCorrectHai $ map (removeHai hai) list
 removePossibleFromList :: [Hai] -> [Hai] -> [Hai]
 removePossibleFromList list hais = foldl (++) [] $ map (removePossible list) hais
 
-removeAtamaConnectedMentsuPossibleFromList :: [Hai] -> [Hai]
-removeAtamaConnectedMentsuPossibleFromList hais = removePossibleFromList atamaConnectedMentsuList hais
+removeAtamaConnectedShuntsuPossibleFromList :: [Hai] -> [Hai]
+removeAtamaConnectedShuntsuPossibleFromList hais = removePossibleFromList atamaConnectedShuntsuList hais
 
 removeAtamaPossibleFromList :: [Hai] -> [Hai]
 removeAtamaPossibleFromList hais = removePossibleFromList atamaList hais
