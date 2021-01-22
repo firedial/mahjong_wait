@@ -1,9 +1,8 @@
 
-module GetHai(nextHai, isExistOverHaiCount) where
+module GetHai(nextHai, isNotExistOverHaiCount) where
 
-isExistOverHaiCount :: [Int] -> Bool
-isExistOverHaiCount [] = False
-isExistOverHaiCount (x:xs) = if x > maxHaiCount then True else isExistOverHaiCount xs
+isNotExistOverHaiCount :: [Int] -> Bool
+isNotExistOverHaiCount x = null $ filter (\x -> x > maxHaiCount) x
 
 maxHaiCount :: Int
 maxHaiCount = 4
