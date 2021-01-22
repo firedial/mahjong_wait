@@ -1,5 +1,5 @@
 
-module NormalForm(isNormalForm) where
+module NormalForm(isNormalForm, getMiddleHai) where
 
 -- 標準形かどうかをみる
 isNormalForm :: [Int] -> Bool
