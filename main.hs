@@ -32,7 +32,7 @@ printDetail hai =
         , stringAgariHaiCount
         , "|"
         , show len
-        , if isSymmetry middleHai then "o" else "x"
+        , if isSymmetry middleHai (reverse middleHai) then "o" else "x"
         , if isRightClosed hai agariHaiCount then "o" else "x"
         , if isLeftClosed hai agariHaiCount then "o" else "x"
         , stringSendableForm
