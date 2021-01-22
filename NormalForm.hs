@@ -1,8 +1,9 @@
 
 module NormalForm(isNormalForm) where
 
+-- 標準形かどうかをみる
 isNormalForm :: [Int] -> Bool
-isNormalForm hai = if not (isFormerGravity middleHai reverseMiddleHai) then False else if len >= 8 then True else isStartTwo
+isNormalForm hai = (isFormerGravity middleHai reverseMiddleHai) && (len >= 8  || isStartTwo)
     where
         len = length middleHai
         middleHai = getMiddleHai hai
