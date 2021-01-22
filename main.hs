@@ -32,6 +32,7 @@ printDetail hai =
         , stringAgariHaiCount
         , "|"
         , show len
+        , if isSymmetry middleHai then "o" else "x"
         , if isRightClosed hai agariHaiCount then "o" else "x"
         , if isLeftClosed hai agariHaiCount then "o" else "x"
         , stringSendableForm
@@ -43,7 +44,8 @@ printDetail hai =
     where
         stringHai = intercalate " " (map show hai)
         count = sum hai
-        len = length $ NormalForm.getMiddleHai hai
+        middleHai = NormalForm.getMiddleHai hai
+        len = length middleHai
         isRegular = mod (sum hai) 3 == 1
         regularCount = if not isRegular then count + 2 else count
         agariHai = Agari.getAgariHai hai
@@ -51,7 +53,7 @@ printDetail hai =
         agariHaiAllCount = sum agariHaiCount
         agariKindCount = length $ filter (\x -> x /= 0) agariHaiCount
         stringAgariHaiCount = intercalate " " $ getAgariHaiCountWithDetail hai agariHai
-        isSendableForm = Agari.isAgariForm hai
+        isSendableForm = if isRegular then False else Agari.isAgariForm hai
         stringSendableForm = if isRegular then "-" else if isSendableForm then "o" else "x"
 
 getAgariHaiCount :: [Int] -> [Bool] -> [Int]
@@ -74,5 +76,11 @@ isRightClosed (x:xs) (y:ys) = if x > 0 then True else if y > 0 then False else i
 
 isLeftClosed :: [Int] -> [Int] -> Bool
 isLeftClosed hai wait = isRightClosed (reverse hai) (reverse wait)
+
+isSymmetry :: [Int] -> [Int] -> Bool
+isSymmetry [] [] = True
+isSymmetry [] _ = False
+isSymmetry _ [] = False
+isSymmetry (x:xs) (y:ys) = if x /= y then False else isSymmetry xs ys
 
 
