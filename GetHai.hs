@@ -1,14 +1,11 @@
 
 module GetHai(nextHai, isNotExistOverHaiCount) where
 
+-- 5 枚以上使っている牌がないかみる
 isNotExistOverHaiCount :: [Int] -> Bool
-isNotExistOverHaiCount x = null $ filter (\x -> x > maxHaiCount) x
+isNotExistOverHaiCount x = null $ filter (\x -> x >= 5) x
 
-maxHaiCount :: Int
-maxHaiCount = 4
-
--- get next hai contains over 4
-
+-- 次に考える牌形を取得する
 nextHai :: [Int] -> [Int]
 nextHai (x:xs)
     | x == 0 = slide (x:xs)
