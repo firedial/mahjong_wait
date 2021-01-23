@@ -36,7 +36,7 @@ printDetail hai =
         , if isRightClosed hai agariHaiCount then "o" else "x"
         , if isLeftClosed hai agariHaiCount then "o" else "x"
         , stringSendableForm
-        , if len == 8 then "?" else "-"
+        , if len /= 8 then "-" else if isTargetForm $ moveHaiForEight hai then (if isRightForEight then ">" else "<") else (if isRightForEight then "r" else "l")
         , "|"
         , show $ agariKindCount + if isSendableForm then 1 else 0
         , show $ agariHaiAllCount + if isSendableForm then 2 else 0
@@ -55,6 +55,13 @@ printDetail hai =
         stringAgariHaiCount = intercalate " " $ getAgariHaiCountWithDetail hai agariHai
         isSendableForm = if isRegular then False else Agari.isAgariForm hai
         stringSendableForm = if isRegular then "-" else if isSendableForm then "o" else "x"
+        isRightForEight = head hai == 0 
+
+moveHaiForEight :: [Int] -> [Int]
+moveHaiForEight hai = 
+    if f == 0 then (delete 0 hai) ++ [0] else 0 : (delete 8 hai)
+    where
+        f = head hai
 
 getAgariHaiCount :: [Int] -> [Bool] -> [Int]
 getAgariHaiCount [] [] = []
